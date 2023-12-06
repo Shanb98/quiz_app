@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/answer_button.dart';
+import 'package:quiz_app/data/questions.dart';
 
 class QuestionScreen extends StatelessWidget {
   
@@ -12,14 +14,14 @@ class QuestionScreen extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text(
-            'Question 1',
+          Text(
+            questions[0].question,
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.white, fontSize: 28),
+            style: const TextStyle(color: Colors.white, fontSize: 28),
           ),
-          OutlinedButton(
-              onPressed: () {},
-              child: const Text('Answer 1')),
+
+          ...questions[0].answers.map((answer) => AnswerButton(value: answer, onAnswer: (){})),
+
           const SizedBox(
             height: 40,
           ),
