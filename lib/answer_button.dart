@@ -4,12 +4,14 @@ class AnswerButton  extends StatelessWidget {
   const AnswerButton({super.key, required this.value, required this.onAnswer});
 
   final String value;
-  final Function() onAnswer;
+  final Function(String value) onAnswer;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: onAnswer,
+        onPressed: (){
+          onAnswer(value);
+        },
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white,
           backgroundColor: Colors.purple,
