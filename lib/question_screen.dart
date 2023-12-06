@@ -2,32 +2,54 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/answer_button.dart';
 import 'package:quiz_app/data/questions.dart';
 
-class QuestionScreen extends StatelessWidget {
+class QuestionScreen extends StatefulWidget {
   
-
   const QuestionScreen({super.key,required this.onAction});
   final Function(String value) onAction;
 
   @override
+  State<QuestionScreen> createState() => _QuestionScreenState();
+}
+
+class _QuestionScreenState extends State<QuestionScreen> {
+
+  int currentQuestionIndex = 0;
+
+  void answerQuestion(String answer) {
+    setState(() {
+      currentQuestionIndex++;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Center(
+    return SizedBox(
+      width: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),      
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            questions[0].question,
+            questions[currentQuestionIndex].question,
             textAlign: TextAlign.center,
             style: const TextStyle(color: Colors.white, fontSize: 28),
           ),
 
-          ...questions[0].answers.map((answer) => AnswerButton(value: answer, onAnswer: (){})),
+          ...questions[currentQuestionIndex].answers.map((answer) => 
+            AnswerButton(
+              value: answer, 
+              onAnswer: () {
+                answerQuestion(answer);
+              })),
 
           const SizedBox(
             height: 40,
           ),
             TextButton(
                 onPressed: () {
-                  onAction('start');
+                  widget.onAction('start');
                 },
                 child: const Text(
                   'Back to Start',
@@ -35,7 +57,10 @@ class QuestionScreen extends StatelessWidget {
                 ))
         ],
       ),
+      ),
     );
   }
   
+  
+
 }
