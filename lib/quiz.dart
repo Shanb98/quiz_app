@@ -11,13 +11,14 @@ class Quiz extends StatefulWidget {
 
 class _QuizState extends State<Quiz> {
   String activeScreen = 'start';
+  
 
-  void onScreenChange() {
-
+  void onScreenChange(String value) {
     setState(() {
-      activeScreen = 'quiz';
+      activeScreen = value;
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +30,8 @@ class _QuizState extends State<Quiz> {
 
     if (activeScreen == 'quiz') {
       currentScreen =
-          QuestionScreen();
-    }    
+          QuestionScreen(onAction: onScreenChange);
+    }
     return  MaterialApp(
       home: Scaffold(
         body: Container(

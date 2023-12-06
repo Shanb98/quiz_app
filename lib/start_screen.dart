@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key ,required this.onAction});
 
-final Function() onAction;
+  final Function(String value) onAction;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -20,7 +20,9 @@ final Function() onAction;
             style: TextStyle(color: Colors.white, fontSize: 28),
           ),
           OutlinedButton(
-              onPressed: onAction,
+              onPressed: () {
+                onAction('quiz');
+              },
               child: const Text('Start Quiz'))
         ],
       ),
